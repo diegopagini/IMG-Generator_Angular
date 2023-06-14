@@ -1,0 +1,9 @@
+:root {
+  --background: #fff;
+  --primary-color: blue;
+}
+
+body[color-theme="dark"] {
+  --background: #000;
+  --primary-color: red;
+}
