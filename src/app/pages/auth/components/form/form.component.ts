@@ -1,24 +1,42 @@
 import {
-  GoogleLoginProvider,
   GoogleSigninButtonModule,
   SocialAuthService,
   SocialLoginModule,
+  SocialUser,
 } from '@abacritt/angularx-social-login';
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [CommonModule, SocialLoginModule, GoogleSigninButtonModule],
+  imports: [SocialLoginModule, GoogleSigninButtonModule],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormComponent {
+export class FormComponent implements OnInit, OnDestroy {
   private readonly _authService = inject(SocialAuthService);
+  private readonly _router = inject(Router);
+  private unsubscribe$ = new Subject<void>();
 
-  onLogin(): void {
-    this._authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  ngOnInit(): void {
+    this._authService.authState
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((user: SocialUser) => {
+        if (user.authToken) this._router.navigate(['/dashboard']);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

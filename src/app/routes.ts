@@ -27,6 +27,7 @@ export const routes: Route[] = [
               id: GoogleLoginProvider.PROVIDER_ID,
               provider: new GoogleLoginProvider(environment.GOOGLE_CLIENT_ID, {
                 oneTapEnabled: false,
+                prompt: 'select_account',
               }),
             },
           ],

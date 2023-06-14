@@ -1,0 +1,15 @@
+@import "helpers";
+
+:host {
+  @include center;
+  height: 100%;
+}
+
+.form {
+  align-items: center;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.75rem 0.75rem #00537d1f;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+}
