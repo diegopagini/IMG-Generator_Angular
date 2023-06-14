@@ -1,14 +1,12 @@
+import { NgOptimizedImage, NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-image',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgOptimizedImage, NgStyle],
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ImageComponent {
-
-}
+export class ImageComponent {}
