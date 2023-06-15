@@ -1,4 +1,5 @@
 import {
+  FacebookLoginProvider,
   GoogleLoginProvider,
   SocialAuthServiceConfig,
 } from '@abacritt/angularx-social-login';
@@ -10,7 +11,7 @@ import {
 import { importProvidersFrom } from '@angular/core';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withRouterConfig } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
 import { HttpInterceptor, JwtInterceptor } from './app/core/interceptors';
@@ -20,7 +21,12 @@ import { environment } from './environments/environment';
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(BrowserModule),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withRouterConfig({
+        paramsInheritanceStrategy: 'always',
+      })
+    ),
     // Social Login
     {
       provide: 'SocialAuthServiceConfig',
@@ -33,6 +39,10 @@ bootstrapApplication(AppComponent, {
               oneTapEnabled: false,
               prompt: 'select_account',
             }),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(environment.FACEBOOK_CLIENT_ID),
           },
         ],
       } as SocialAuthServiceConfig,

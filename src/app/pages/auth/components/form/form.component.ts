@@ -1,4 +1,5 @@
 import {
+  FacebookLoginProvider,
   GoogleSigninButtonModule,
   SocialAuthService,
   SocialLoginModule,
@@ -38,6 +39,10 @@ export class FormComponent implements OnInit, OnDestroy {
           this._router.navigate(['/dashboard']);
         }
       });
+  }
+
+  onLoginWithFacebook(): void {
+    this._authService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
   ngOnDestroy(): void {

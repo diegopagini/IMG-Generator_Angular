@@ -1,0 +1,12 @@
+@import "helpers";
+
+.dashboard {
+  margin: 0 auto;
+  max-width: $max-width;
+  padding: 2rem 3rem;
+
+  &__title {
+    font-weight: 600;
+    margin: 0;
+  }
+}

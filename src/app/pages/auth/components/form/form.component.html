@@ -1,9 +1,20 @@
 <form class="form">
-  <asl-google-signin-button
-    [shape]="'rectangular'"
-    [size]="'large'"
-    [text]="'signin_with'"
-    [type]="'standard'"
-  >
-  </asl-google-signin-button>
+  <div class="form__container">
+    <asl-google-signin-button
+      [shape]="'rectangular'"
+      [size]="'large'"
+      [text]="'signin_with'"
+      [type]="'standard'"
+    >
+    </asl-google-signin-button>
+
+    <button class="form__facebook" (click)="onLoginWithFacebook()">
+      <img
+        class="form__facebook-logo"
+        src="assets/images/facebook.svg"
+        alt="facebook logo"
+      />
+      Facebook
+    </button>
+  </div>
 </form>

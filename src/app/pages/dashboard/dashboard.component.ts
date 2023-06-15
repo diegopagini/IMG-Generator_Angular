@@ -9,10 +9,18 @@ import {
 } from '@angular/core';
 import { UserService } from '@shared/services/user.service';
 
+import { DownloadImageComponent } from './components/download-image/download-image.component';
+import { InputImageComponent } from './components/input-image/input-image.component';
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, SocialLoginModule],
+  imports: [
+    CommonModule,
+    SocialLoginModule,
+    DownloadImageComponent,
+    InputImageComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
