@@ -1,1 +1,1 @@
-# Base
+# IMG Generator App with Social Login
