@@ -1,5 +1,13 @@
+import { SocialUser } from '@abacritt/angularx-social-login';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  Signal,
+} from '@angular/core';
+import { UserService } from '@shared/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,4 +17,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardComponent {}
+export class DashboardComponent implements OnInit {
+  private readonly _userService = inject(UserService);
+  user: Signal<SocialUser>;
+
+  ngOnInit(): void {
+    this.user = this._userService.getUser();
+  }
+}

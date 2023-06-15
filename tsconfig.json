@@ -19,6 +19,7 @@
     "strict": true,
     "target": "ES2022",
     "useDefineForClassFields": false,
+    "strictPropertyInitialization": false,
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@pages/*": ["src/app/pages/*"],

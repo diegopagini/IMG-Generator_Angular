@@ -2,7 +2,9 @@ import {
   GoogleLoginProvider,
   SocialAuthServiceConfig,
 } from '@abacritt/angularx-social-login';
-import { Route } from '@angular/router';
+import { inject } from '@angular/core';
+import { Route, Router } from '@angular/router';
+import { UserService } from '@shared/services/user.service';
 import { environment } from 'src/environments/environment';
 
 export const routes: Route[] = [
@@ -12,6 +14,12 @@ export const routes: Route[] = [
       import('./pages/dashboard/dashboard.component').then(
         (c) => c.DashboardComponent
       ),
+    canActivate: [
+      () =>
+        inject(UserService).isAuthenticated()()
+          ? true
+          : inject(Router).navigate(['auth']),
+    ],
   },
   {
     path: 'auth',

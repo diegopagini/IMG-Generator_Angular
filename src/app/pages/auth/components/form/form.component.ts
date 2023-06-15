@@ -12,6 +12,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '@shared/services/user.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -25,13 +26,17 @@ import { Subject, takeUntil } from 'rxjs';
 export class FormComponent implements OnInit, OnDestroy {
   private readonly _authService = inject(SocialAuthService);
   private readonly _router = inject(Router);
+  private readonly _userService = inject(UserService);
   private unsubscribe$ = new Subject<void>();
 
   ngOnInit(): void {
     this._authService.authState
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((user: SocialUser) => {
-        if (user.authToken) this._router.navigate(['/dashboard']);
+        if (user.id) {
+          this._userService.setUser(user);
+          this._router.navigate(['/dashboard']);
+        }
       });
   }
 
