@@ -1,4 +1,8 @@
 import {
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+} from '@abacritt/angularx-social-login';
+import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
@@ -6,21 +10,33 @@ import {
 import { importProvidersFrom } from '@angular/core';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter, withRouterConfig } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
 import { HttpInterceptor, JwtInterceptor } from './app/core/interceptors';
 import { routes } from './app/routes';
+import { environment } from './environments/environment';
 
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(BrowserModule),
-    provideRouter(
-      routes,
-      withRouterConfig({
-        paramsInheritanceStrategy: 'always',
-      })
-    ),
+    provideRouter(routes),
+    // Social Login
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(environment.GOOGLE_CLIENT_ID, {
+              oneTapEnabled: false,
+              prompt: 'select_account',
+            }),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
     provideHttpClient(withInterceptorsFromDi()),
     // Interceptors
     {

@@ -1,4 +1,4 @@
-import { SocialUser } from '@abacritt/angularx-social-login';
+import { SocialLoginModule, SocialUser } from '@abacritt/angularx-social-login';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -12,7 +12,7 @@ import { UserService } from '@shared/services/user.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SocialLoginModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
