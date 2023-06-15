@@ -2,5 +2,5 @@
   <h1 class="dashboard__title">Hi {{ user().firstName }}!</h1>
   <h2 class="dashboard__subtitle">Ready to generate some images?</h2>
 
-  <app-input-image></app-input-image>
+  <app-input-image (submit)="onSubmit($event)"></app-input-image>
 </section>

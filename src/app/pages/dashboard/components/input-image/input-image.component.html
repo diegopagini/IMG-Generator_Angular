@@ -1,1 +1,35 @@
-<p>input-image works!</p>
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field class="form__input">
+    <mat-label>Prompt: (min 6 characters)</mat-label>
+    <input matInput formControlName="prompt" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Quantity: (between 1 and 10)</mat-label>
+    <input matInput type="number" formControlName="quantity" />
+  </mat-form-field>
+
+  <div>
+    <mat-radio-group color="primary">
+      <mat-radio-button (change)="setOption($event.value)" value="256x256"
+        >256x256</mat-radio-button
+      >
+      <mat-radio-button (change)="setOption($event.value)" value="512x512"
+        >512x512</mat-radio-button
+      >
+      <mat-radio-button (change)="setOption($event.value)" value="1024x1024"
+        >1024x1024</mat-radio-button
+      >
+    </mat-radio-group>
+  </div>
+
+  <button
+    class="form__button"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="form.invalid || form.untouched"
+  >
+    SUBMIT
+  </button>
+</form>

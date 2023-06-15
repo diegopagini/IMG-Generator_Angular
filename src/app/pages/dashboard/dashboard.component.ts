@@ -11,6 +11,7 @@ import { UserService } from '@shared/services/user.service';
 
 import { DownloadImageComponent } from './components/download-image/download-image.component';
 import { InputImageComponent } from './components/input-image/input-image.component';
+import { Propmt } from './interfaces/prompt.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,5 +32,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this._userService.getUser();
+  }
+
+  onSubmit(value: Propmt): void {
+    console.log(value);
   }
 }
