@@ -3,18 +3,13 @@ import {
   GoogleLoginProvider,
   SocialAuthServiceConfig,
 } from '@abacritt/angularx-social-login';
-import {
-  HTTP_INTERCEPTORS,
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withRouterConfig } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
-import { HttpInterceptor, JwtInterceptor } from './app/core/interceptors';
 import { routes } from './app/routes';
 import { environment } from './environments/environment';
 
@@ -47,18 +42,7 @@ bootstrapApplication(AppComponent, {
         ],
       } as SocialAuthServiceConfig,
     },
-    provideHttpClient(withInterceptorsFromDi()),
-    // Interceptors
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true,
-    },
+    provideHttpClient(),
     provideAnimations(),
   ],
 }).catch((err) => console.error(err));

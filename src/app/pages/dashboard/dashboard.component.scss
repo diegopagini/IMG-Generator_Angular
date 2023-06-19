@@ -9,4 +9,9 @@
     font-weight: 600;
     margin: 0;
   }
+
+  &__spinner {
+    min-height: 30vh;
+    @include center;
+  }
 }

@@ -35,28 +35,23 @@ import { Format } from '@pages/dashboard/interfaces/prompt.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputImageComponent implements OnInit {
-  @Output() submit = new EventEmitter();
+  @Output() prompEmitt = new EventEmitter();
   private readonly _formBuilder = inject(FormBuilder);
   form: FormGroup;
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
       prompt: [null, [Validators.required, Validators.minLength(6)]],
-      quantity: [
-        null,
-        [Validators.required, Validators.min(1), Validators.max(10)],
-      ],
-      format: [null, [Validators.required]],
+      n: [null, [Validators.required, Validators.min(1), Validators.max(10)]],
+      size: [null, [Validators.required]],
     });
   }
 
   setOption(value: Format): void {
-    this.form.get('format')?.setValue(value);
+    this.form.get('size')?.setValue(value);
   }
 
   onSubmit(): void {
-    if (this.form.valid) {
-      this.submit.emit(this.form.value);
-    }
+    if (this.form.valid) this.prompEmitt.emit(this.form.value);
   }
 }

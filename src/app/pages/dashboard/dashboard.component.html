@@ -2,5 +2,16 @@
   <h1 class="dashboard__title">Hi {{ user().firstName }}!</h1>
   <h2 class="dashboard__subtitle">Ready to generate some images?</h2>
 
-  <app-input-image (submit)="onSubmit($event)"></app-input-image>
+  <app-input-image (prompEmitt)="onSubmit($event)"></app-input-image>
+
+  <ng-container *ngIf="images$ | async as images">
+    <app-download-image
+      *ngFor="let image of images"
+      [image]="image"
+    ></app-download-image>
+  </ng-container>
+
+  <div *ngIf="isLoading()" class="dashboard__spinner">
+    <mat-spinner></mat-spinner>
+  </div>
 </section>
