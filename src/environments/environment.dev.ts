@@ -3,6 +3,6 @@ export const environment = {
   FACEBOOK_CLIENT_ID: '1113362066289083',
   GOOGLE_CLIENT_ID:
     '820882359177-20t5ji9ce65ojl80kpht8r7ds5kadj7p.apps.googleusercontent.com',
-  OPEN_AI_API_KEY: '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',
+  OPEN_AI_API_KEY: '',
   production: false,
 };

@@ -4,12 +4,12 @@
 
   <app-input-image (prompEmitt)="onSubmit($event)"></app-input-image>
 
-  <ng-container *ngIf="images$ | async as images">
+  <div class="dashboard__images-container" *ngIf="images$ | async as images">
     <app-download-image
       *ngFor="let image of images"
       [image]="image"
     ></app-download-image>
-  </ng-container>
+  </div>
 
   <div *ngIf="isLoading()" class="dashboard__spinner">
     <mat-spinner></mat-spinner>
