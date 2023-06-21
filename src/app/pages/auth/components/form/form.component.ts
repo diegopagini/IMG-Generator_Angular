@@ -13,6 +13,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { GithubService } from '@pages/auth/services/github.service';
 import { UserService } from '@shared/services/user.service';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -28,6 +29,7 @@ export class FormComponent implements OnInit, OnDestroy {
   private readonly _authService = inject(SocialAuthService);
   private readonly _router = inject(Router);
   private readonly _userService = inject(UserService);
+  private readonly _githubService = inject(GithubService);
   private unsubscribe$ = new Subject<void>();
 
   ngOnInit(): void {
@@ -43,6 +45,10 @@ export class FormComponent implements OnInit, OnDestroy {
 
   onLoginWithFacebook(): void {
     this._authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  onLoginWithGithub(): void {
+    this._githubService.login();
   }
 
   ngOnDestroy(): void {

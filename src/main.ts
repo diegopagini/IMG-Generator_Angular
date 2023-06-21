@@ -8,6 +8,7 @@ import { importProvidersFrom } from '@angular/core';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withRouterConfig } from '@angular/router';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/routes';
@@ -15,7 +16,16 @@ import { environment } from './environments/environment';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule),
+    importProvidersFrom(
+      BrowserModule,
+      // OAuth
+      OAuthModule.forRoot({
+        resourceServer: {
+          allowedUrls: ['https://api.github.com', 'http://localhost:4200'],
+          sendAccessToken: true,
+        },
+      })
+    ),
     provideRouter(
       routes,
       withRouterConfig({

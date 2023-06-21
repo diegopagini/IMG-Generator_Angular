@@ -19,7 +19,8 @@
     gap: 1rem;
   }
 
-  &__facebook {
+  &__facebook,
+  &__github {
     align-items: center;
     display: flex;
     background-color: #3b5998;
@@ -41,5 +42,9 @@
       width: 1.5rem;
       padding-right: 1rem;
     }
+  }
+
+  &__github {
+    background-color: #0f1117;
   }
 }
